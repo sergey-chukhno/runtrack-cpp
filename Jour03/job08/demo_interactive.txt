@@ -1,0 +1,76 @@
+===================================
+INTERACTIVE GAME - QUICK START GUIDE
+===================================
+
+TO RUN THE GAME:
+./campus_quest_interactive
+
+GAME MODE SELECTION:
+[1] Interactive Mode - YOU control the hero! 🎮
+[2] Automated Mode - Watch the AI play
+
+INTERACTIVE CONTROLS (Mode 1):
+====================
+
+MAIN MENU (each turn):
+[1] Move (WASD)
+[2] Attack (current target)
+[3] Change Weapon
+[4] View Status  
+[5] Pass Turn
+[6] Help
+
+MOVEMENT CONTROLS (WASD):
+W - Move UP (North, +Y)
+A - Move LEFT (West, -X)
+S - Move DOWN (South, -Y)
+D - Move RIGHT (East, +X)
+
+Then enter distance (e.g., "2.5")
+
+WEAPON SELECTION:
+[1] Bow - Range:4, Power:1 (safe, long distance)
+[2] Spear - Range:2, Power:2 (balanced)
+[3] Sword - Range:1, Power:4 (high risk, high reward)
+
+STRATEGIC TIPS:
+===============
+1. KEEP DISTANCE with Bow (enemies can't reach you)
+2. USE SWORD when enemies get close (maximum damage)
+3. WATCH ENEMY POSITIONS (they move 1 unit/turn toward you)
+4. ENEMIES ATTACK at range ≤ 1
+
+EXAMPLE GAMEPLAY SESSION:
+=======================
+
+Turn 1:
+- Choose [1] Move
+- Press 'D' (move right)
+- Enter "2" (distance)
+- Hero moves from (0,0) to (2,0)
+- Enemies advance
+
+Turn 2:
+- Choose [2] Attack
+- Attacks Goblin with current weapon (Bow)
+- Goblin takes 1 damage
+- Enemies advance
+
+Turn 3:
+- Choose [3] Change Weapon
+- Select [3] Sword
+- Now equipped with Sword (Power: 4!)
+
+Turn 4:
+- Choose [2] Attack
+- MASSIVE 4 damage with Sword!
+- Enemy almost defeated!
+
+VICTORY CONDITION:
+Defeat all 3 enemies (Goblin, Orc, Troll)
+
+DEFEAT CONDITION:
+Your health reaches 0
+
+Have fun! 🎮
+
