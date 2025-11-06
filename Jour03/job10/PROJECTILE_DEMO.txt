@@ -1,0 +1,170 @@
+===================================
+JOB 10 - PROJECTILE SYSTEM DEMO
+===================================
+
+WHAT'S NEW:
+- Projectile class (flying arrows)
+- Bow creates arrow projectiles
+- Arrows deal damage on collision
+- Automatic projectile cleanup
+- Visual feedback for ranged combat
+
+TO RUN:
+./campus_quest_projectiles
+
+===================================
+HOW PROJECTILES WORK
+===================================
+
+INSTANT HIT MODEL:
+1. Player fires Bow
+2. Arrow projectile created at player position
+3. Arrow "flies" toward target (visual)
+4. Arrow checks collision immediately
+5. Arrow deals damage if hit
+6. Arrow marked as expired
+7. Arrow removed from game
+All in ONE turn!
+
+PROJECTILE LIFECYCLE:
+Create → Process → Damage → Cleanup
+
+===================================
+BOW vs MELEE COMPARISON
+===================================
+
+BOW ATTACK (with Projectile):
+---------------------------
+Player: "Attack with Bow"
+→ 🏹 Firing arrow at Goblin!
+→ 💨 Arrow flies through the air...
+→ 🎯 Arrow HITS Goblin! Deals 1 damage (HP: 30 → 29)
+→ [Cleanup] Removed 1 expired projectile(s)
+
+SWORD ATTACK (melee, no projectile):
+-----------------------------------
+Player: "Attack with Sword"
+→ ⚔️ Sword slash! Deals 4 damage to Goblin (HP: 29 → 25)
+
+DIFFERENCE:
+- Bow = Creates visible projectile object
+- Sword = Direct damage application
+- Same result, different feel!
+
+===================================
+TESTING SCENARIOS
+===================================
+
+SCENARIO 1: BOW ATTACK SEQUENCE
+-------------------------------
+Turn 1:
+  [2] Attack (with Bow equipped)
+  → Arrow created
+  → Arrow hits target
+  → Target takes 1 damage
+  → Arrow removed
+
+Verify: Target health reduced by 1
+
+SCENARIO 2: WEAPON COMPARISON
+-----------------------------
+Turn 1: Equip Bow, attack
+  → Projectile created
+  → "🏹 Firing arrow..."
+  → "🎯 Arrow HITS..."
+
+Turn 2: Switch to Sword, attack
+  → No projectile
+  → "⚔️ Sword slash!"
+  → Direct damage
+
+SCENARIO 3: MULTIPLE ARROWS
+---------------------------
+Turn 1: Attack with Bow → Arrow 1 created
+Turn 2: Attack with Bow → Arrow 2 created
+Turn 3: Attack with Bow → Arrow 3 created
+
+Each arrow:
+- Hits target
+- Deals 1 damage
+- Gets cleaned up
+
+SCENARIO 4: PROJECTILE CLEANUP
+------------------------------
+Watch cleanup phase:
+  [CLEANUP PHASE]
+  🏹 Removed 1 expired projectile(s)
+
+Automatic memory management!
+
+===================================
+TECHNICAL DETAILS
+===================================
+
+PROJECTILE PROPERTIES:
+- Damage: Same as weapon power (Bow = 1)
+- Owner: Player who fired it
+- Target: Character being attacked
+- HasHit: Tracks if already dealt damage
+
+COLLISION DETECTION:
+- Projectile at player position
+- Target at enemy position
+- Distance check (collision detection)
+- If hit: apply damage
+
+CLEANUP:
+- After projectile.update(), hasHit = true
+- Cleanup phase calls removeExpiredProjectiles()
+- unique_ptr automatically deletes projectile
+- No memory leaks!
+
+===================================
+GAME DESIGN IMPLICATIONS
+===================================
+
+BOW IS NOW UNIQUE:
+- Only ranged weapon with projectiles
+- Feels different from melee
+- Visual distinction (arrow effects)
+- Strategic choice
+
+RANGED COMBAT FEEL:
+- "Firing" vs "Slashing"
+- Arrow flight (even if instant)
+- Distinct visual feedback
+- More cinematic
+
+FUTURE EXTENSIONS:
+- Multi-turn arrow flight
+- Dodging arrows (move out of path)
+- Different projectile types
+- Projectile speed/travel time
+- Area-of-effect projectiles
+
+===================================
+ARCHITECTURE PATTERNS
+===================================
+
+DESIGN PATTERNS:
+✓ Factory Pattern (createObject<Projectile>)
+✓ Object Pool (could add reusable arrows)
+✓ Strategy Pattern (Bow creates projectiles)
+✓ Composite Pattern (Projectile is GameObject)
+
+MODERN C++ FEATURES:
+✓ Smart pointers (automatic cleanup)
+✓ Dynamic cast (type checking)
+✓ Lambda expressions (cleanup filter)
+✓ RAII (resource management)
+
+GAME DEVELOPMENT:
+✓ Projectile systems (arrows, bullets)
+✓ Weapon differentiation (ranged vs melee)
+✓ Hit detection (collision-based)
+✓ Lifecycle management (spawn, update, destroy)
+
+===================================
+
+ENJOY FIRING ARROWS! 🏹
+
