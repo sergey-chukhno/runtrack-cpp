@@ -1,0 +1,143 @@
+===================================
+JOB 09 - COLLISION DETECTION DEMO
+===================================
+
+WHAT'S NEW:
+- Objects cannot pass through each other
+- Distance-based collision (0.5 unit radius)
+- Player movement blocked by collisions
+- Enemy AI respects collisions
+- Decor acts as obstacles
+
+TO RUN:
+./campus_quest_collisions
+
+===================================
+COLLISION SCENARIOS TO TEST
+===================================
+
+SCENARIO 1: PLAYER BLOCKED BY ENEMY
+------------------------------------
+Turn 1:
+  Initial: Player (0,0), Goblin (5,0)
+  Action: Choose [1] Move
+  Direction: D (right)
+  Distance: 6
+  Result: ❌ COLLISION! Movement blocked by Goblin
+  Player stays at (0,0)
+
+WHY: Moving to (6,0) would put player within 0.5 units of Goblin at (5,0)
+Distance: 6-5 = 1, but Goblin will have moved closer!
+
+SCENARIO 2: PLAYER BLOCKED BY DECOR
+------------------------------------
+Turn 1:
+  Initial: Player (0,0), Tree (3,3)
+  Action: Choose [1] Move
+  Direction: W (up)
+  Distance: 3
+  Then: Choose [1] Move again
+  Direction: D (right)
+  Distance: 3
+  Result: ❌ COLLISION! Movement blocked by Ancient Tree
+  
+WHY: Moving to (3,3) would collide with tree at (3,3)
+
+SCENARIO 3: ENEMY BLOCKED BY ANOTHER ENEMY
+-------------------------------------------
+Watch enemies in automated mode:
+  Enemy 1 moves toward player
+  Enemy 2 moves toward player
+  If they get too close to each other:
+  Result: ⚠️ Enemy blocked by collision
+  
+WHY: Enemies can't stack on top of each other
+
+SCENARIO 4: STRATEGIC POSITIONING
+----------------------------------
+Use decor as cover:
+  Move player BEHIND a tree
+  Enemy tries to reach you but blocked by tree
+  You can attack from safety!
+
+===================================
+COLLISION MECHANICS
+===================================
+
+COLLISION RADIUS: 0.5 units
+- Objects within 0.5 units = COLLISION
+- Distance > 0.5 units = NO COLLISION
+
+COLLISION DETECTION:
+1. Player tries to move to (newX, newY)
+2. Check distance from (newX, newY) to ALL objects
+3. If any distance < 0.5 → BLOCKED
+4. Otherwise → MOVE ALLOWED
+
+WHAT COLLIDES:
+✓ Player vs Enemy (blocks)
+✓ Player vs Decor (blocks)
+✓ Enemy vs Enemy (blocks)
+✓ Enemy vs Decor (blocks)
+✓ Enemy vs Player (blocks - enemies can't walk through you!)
+
+COLLISION FEEDBACK:
+Player: "❌ COLLISION! Movement blocked by Goblin"
+Enemy: "⚠️ Goblin blocked by collision"
+
+===================================
+STRATEGIC IMPLICATIONS
+===================================
+
+1. POSITIONING MATTERS
+   - Can't just run away freely
+   - Must navigate around obstacles
+
+2. TERRAIN IS TACTICAL
+   - Trees/rocks block movement
+   - Use as cover or barriers
+
+3. ENEMIES CAN BLOCK EACH OTHER
+   - Creates interesting situations
+   - "Traffic jams" of enemies!
+
+4. CLOSE COMBAT IS FORCED
+   - Can't avoid enemies forever
+   - Must fight when cornered
+
+===================================
+TESTING CHECKLIST
+===================================
+
+□ Try to move through an enemy → Should be blocked
+□ Try to move through a tree → Should be blocked
+□ Watch enemies bump into each other → Should see collision messages
+□ Move close to enemy (< 0.5) → Should trigger collision
+□ Move away from enemies → Should work fine (no collision)
+□ Attack enemy from distance → Should work (collision doesn't affect attacks)
+
+===================================
+TECHNICAL DETAILS
+===================================
+
+Algorithm: Distance-based Collision Detection
+- O(n) per movement (check all objects)
+- For 10 objects: ~10 distance calculations
+- Fast enough for turn-based games
+
+Formula: sqrt((x2-x1)² + (y2-y1)²) < 0.5
+
+Implementation:
+- GameManager::canMoveTo() - preventive checking
+- GameManager::checkCollision() - direct check
+- GameManager::getBlockingObject() - identify blocker
+
+This is the SAME algorithm used in:
+- Pokemon (collision with trainers, obstacles)
+- Zelda (collision with walls, enemies)
+- Strategy games (unit collision)
+
+===================================
+
+ENJOY TESTING COLLISIONS! 💥
+
